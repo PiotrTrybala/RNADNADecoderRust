@@ -9,7 +9,6 @@ pub struct DecoderEngine {
 }
 
 pub struct CompoundBase {
-    schema_file: String,
     compounds: HashMap<String, String>
 }
 
@@ -37,9 +36,12 @@ impl CompoundBase {
         let compounds = CompoundBase::gen_compound_base(&schema_file);
 
         Self {
-            schema_file,
             compounds
         }
+    }
+
+    pub fn is_base_empty(&self) -> bool {
+        self.compounds.is_empty()
     }
 
     pub fn get_symbol_by_schema(&self, schema: String) -> String {
