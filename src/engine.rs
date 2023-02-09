@@ -2,24 +2,20 @@
 use std::fs;
 use std::path::Path;
 use serde_json::{Result, Value};
+use std::collections::HashMap;
 
 pub struct DecoderEngine {
     compound_base: CompoundBase
 }
 
-pub struct Compound {
-    symbol: String,
-    code: String
-}
-
 pub struct CompoundBase {
     schema_file: String,
-    compounds: Vec<Compound>
+    compounds: HashMap<String, String>
 }
 
 impl DecoderEngine {
 
-    fn new(schema_file: String) -> Self {
+    pub fn new(schema_file: String) -> Self {
 
         let base = CompoundBase::new(schema_file);
 
@@ -32,7 +28,7 @@ impl DecoderEngine {
 
 impl CompoundBase {
 
-    fn new(schema_file: String) -> Self {
+    pub fn new(schema_file: String) -> Self {
 
         let compounds = CompoundBase::gen_compound_base(&schema_file);
 
@@ -42,10 +38,11 @@ impl CompoundBase {
         }
     }
 
-    fn gen_compound_base(schema_file: &String) -> Vec<Compound> {
+    fn gen_compound_base<V, K>(schema_file: &String) -> HashMap<V, K> {
 
+        let compounds = 
 
-        let path = Path::new("./schema/schema.json");
+        let path = Path::new(&schema_file);
 
         if !path.exists() {
             panic!("File does not exists!");
@@ -56,11 +53,18 @@ impl CompoundBase {
 
         let parsed_json: Value = serde_json::from_str(content.as_str()).unwrap();
 
-        assert_eq!(parsed_json["version"], 1);
+        
+        let special_symbols = parsed_json["special"].clone();
+
+
+        let start_symbol = special_symbols["start"].clone();
 
 
 
-        Vec::<Compound>::new()
+
+
+
+        HashMap::<V, K>::new()
 
     }
 
