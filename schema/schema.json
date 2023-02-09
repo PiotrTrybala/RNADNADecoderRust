@@ -1,0 +1,131 @@
+{
+    "version": 1,
+    "special": {
+        "start": [
+            {
+            "symbol": "M_",
+            "schema": "AUG"
+            }
+        ],
+        "stop": [
+            {
+                "symbol": "*",
+                "schema": "UAA"
+            },
+            {
+                "symbol": "*",
+                "schema": "UAG"
+            },
+            {
+                "symbol": "*",
+                "schema": "UGA"
+            }
+        ]
+    },
+    "compounds": [
+        {
+            "symbol": "F",
+            "schema": "UU[UC]"
+        },
+        {
+            "symbol": "L",
+            "schema": "UU[AG]"
+        },
+        {
+            "symbol": "S",
+            "schema": "UC[UCAG]"
+        },
+        {
+            
+            "symbol": "Y",
+            "schema": "UA[UC]"
+        },
+        {
+            
+            "symbol": "C",
+            "schema": "UG[UC]"
+        },
+        {
+            
+            "symbol": "W",
+            "schema": "UG[AG]"
+        },
+        {
+            
+            "symbol": "L",
+            "schema": "CU[UCAG]"
+        },
+        {
+            
+            "symbol": "P",
+            "schema": "CC[UCAG]"
+        },
+        {
+            
+            "symbol": "H",
+            "schema": "CA[UC]"
+        },
+        {
+            
+            "symbol": "Q",
+            "schema": "CA[AG]"
+        },
+        {
+            
+            "symbol": "R",
+            "schema": "CG[UCAG]"
+        },
+        {
+            
+            "symbol": "I",
+            "schema": "AU[UCA]"
+        },
+        {
+            
+            "symbol": "N",
+            "schema": "AA[UC]"
+        },
+        {
+            
+            "symbol": "T",
+            "schema": "AC[UCAG]"
+        },
+        {
+            
+            "symbol": "K",
+            "schema": "AA[AG]"
+        },
+        {
+            
+            "symbol": "R",
+            "schema": "AG[AG]"
+        },
+        {
+            
+            "symbol": "V",
+            "schema": "GU[UCAG]"
+        },
+        {
+            
+            "symbol": "A",
+            "schema": "GC[UCAG]"
+        },
+        {
+            
+            "symbol": "D",
+            "schema": "GA[UC]"
+        },
+        {
+            
+            "symbol": "E",
+            "schema": "GA[AG]"
+        },
+        {
+            
+            "symbol": "G",
+            "schema": "GG[UCAG]"
+        }
+    ]
+}
+
+
