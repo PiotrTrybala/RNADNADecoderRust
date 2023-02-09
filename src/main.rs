@@ -10,17 +10,34 @@ fn main() {
     
 
 
-    let decoderEngine = DecoderEngine::new("/schema/schema.json".to_string());
+    let decoderEngine = DecoderEngine::new("./schema/schema.json".to_string());
+
+    
 
 
 }
+
 #[cfg(test)]
-#[test]
-fn path_test() {
-    let cwd = env::current_dir().unwrap();
+pub mod tests {
+    use crate::DecoderEngine;
+    #[test]
+    fn test_is_base_not_empty() {
+        let engine = DecoderEngine::new("./schema/schema.json".to_string());
+        assert!(!engine.is_base_empty());
+    }
 
-    println!("Current working directory: {}", cwd.display());
+    #[test]
+    #[should_panic]
+    fn test_if_empty_schema_specified() {
+        let engine = DecoderEngine::new("./schema/schemajson.json".to_string());
+    }
 
-    let path = Path::new("./schema/schema.json");
-    assert_eq!(path.exists(), true);
+    #[test]
+    fn test_base_has_correct_compounds() {
+        let engine = DecoderEngine::new("./schema/schema.json".to_string());
+
+        assert!(engine.base_size() == 26);
+    }
+
 }
+

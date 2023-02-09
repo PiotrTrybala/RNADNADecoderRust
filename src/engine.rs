@@ -27,6 +27,14 @@ impl DecoderEngine {
         self.compound_base.get_symbol_by_schema(name)
     }
 
+    pub fn is_base_empty(&self) -> bool {
+        self.compound_base.compounds.is_empty()
+    }
+
+    pub fn base_size(&self) -> usize {
+        self.compound_base.compounds.len()
+    }
+
 }
 
 impl CompoundBase {
@@ -38,14 +46,6 @@ impl CompoundBase {
         Self {
             compounds
         }
-    }
-
-    pub fn is_base_empty(&self) -> bool {
-        self.compounds.is_empty()
-    }
-
-    pub fn base_size(&self) -> usize {
-        self.compounds.len()
     }
 
     pub fn get_symbol_by_schema(&self, schema: String) -> String {
