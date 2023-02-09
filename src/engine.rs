@@ -1,7 +1,7 @@
 
 use std::fs;
 use std::path::Path;
-use serde_json::{Result, Value};
+use serde_json::{Value};
 use std::collections::HashMap;
 
 pub struct DecoderEngine {
@@ -33,6 +33,39 @@ impl DecoderEngine {
 
     pub fn base_size(&self) -> usize {
         self.compound_base.compounds.len()
+    }
+    /// method for decoding rna/dna sequence into series of "whites" :)
+    pub fn decode(&self, input: String) -> Vec<String> {
+
+        let mut results = Vec::<String>::new();
+
+        let mut extend = false;
+        let input_length = input.len();
+        let mut total_length = (&input_length / 3) * 3;
+        if input_length != total_length { 
+            extend = true;
+        }
+
+        for i in 0..3 {
+            let partial_input = &input[i..total_length];
+            results.push(self.partial_decode(partial_input.to_string()));
+            if extend {
+                total_length += 1;
+            }
+        }
+
+
+        results 
+    }
+
+    fn partial_decode(&self, partial_input: String) -> String {
+        let mut output = String::from("");
+        for i in (0..partial_input.len()).step_by(3) {
+            let symbol = self.get_symbol(partial_input[i..i+2].to_string());
+            output += symbol.as_str();
+        }
+
+        output
     }
 
 }
