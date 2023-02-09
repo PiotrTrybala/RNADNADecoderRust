@@ -1,17 +1,44 @@
+#![feature(proc_macro_hygiene, decl_macro)]
 
+#[macro_use] extern crate rocket;
+
+extern crate rocket_codegen;
 pub mod engine;
 
+use serde::{Serialize, Deserialize};
+use rocket_contrib::json::Json;
 use engine::DecoderEngine;
 
+use rocket::*;
+
+#[derive(Serialize, Deserialize)]
+pub struct Input {
+    pub input: String
+}
+
+#[derive(Serialize, Deserialize)]
+pub struct Output {
+    pub o1: String,
+    pub o2: String,
+    pub o3: String
+}
+
+#[post("/decoder", format = "json", data = "<input>")]
+fn decode(input: Json<Input>) -> Json<Output> {
+
+    let engine = DecoderEngine::new("./schema/schema.json".to_string());
+
+    let results = engine.decode(input.input.to_string());
+
+    let out = Output {
+        o1: results[0].to_string(),
+        o2: results[1].to_string(),
+        o3: results[2].to_string()
+    };
+    Json(out)
+}
 fn main() {
-    
-
-
-    let _decoder_engine = DecoderEngine::new("./schema/schema.json".to_string());
-
-    
-
-
+    rocket::ignite().mount("/api/v1/", routes![decode]).launch();
 }
 
 #[cfg(test)]
