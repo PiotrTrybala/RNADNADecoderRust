@@ -1,0 +1,138 @@
+{
+
+    "special": {
+        "start": [
+            {
+            "name": "Mel",
+            "symbol": "M_",
+            "schema": "AUG"
+            }
+        ],
+        "stop": [
+            {
+                "name": "",
+                "symbol": "*",
+                "schema": "UAA"
+            },
+            {
+                "name": "",
+                "symbol": "*",
+                "schema": "UAG"
+            },
+            {
+                "name": "",
+                "symbol": "*",
+                "schema": "UGA"
+            }
+        ]
+    },
+    "compounds": [
+        {
+            "name": "Phe",
+            "symbol": "F",
+            "schema": "UU[UC]"
+        },
+        {
+            "name": "Lue",
+            "symbol": "L",
+            "schema": "UU[AG]"
+        },
+        {
+            "name": "Ser",
+            "symbol": "S",
+            "schema": "UC[UCAG]"
+        },
+        {
+            "name": "Tyr",
+            "symbol": "Y",
+            "schema": "UA[UC]"
+        },
+        {
+            "name": "Cys",
+            "symbol": "C",
+            "schema": "UG[UC]"
+        },
+        {
+            "name": "Trp",
+            "symbol": "W",
+            "schema": "UG[AG]"
+        },
+        {
+            "name": "Leu",
+            "symbol": "L",
+            "schema": "CU[UCAG]"
+        },
+        {
+            "name": "Pro",
+            "symbol": "P",
+            "schema": "CC[UCAG]"
+        },
+        {
+            "name": "His",
+            "symbol": "H",
+            "schema": "CA[UC]"
+        },
+        {
+            "name": "Gin",
+            "symbol": "Q",
+            "schema": "CA[AG]"
+        },
+        {
+            "name": "Arg",
+            "symbol": "R",
+            "schema": "CG[UCAG]"
+        },
+        {
+            "name": "Ile",
+            "symbol": "I",
+            "schema": "AU[UCA]"
+        },
+        {
+            "name": "Asn",
+            "symbol": "N",
+            "schema": "AA[UC]"
+        },
+        {
+            "name": "Thr",
+            "symbol": "T",
+            "schema": "AC[UCAG]"
+        },
+        {
+            "name": "Lys",
+            "symbol": "K",
+            "schema": "AA[AG]"
+        },
+        {
+            "name": "Arg",
+            "symbol": "R",
+            "schema": "AG[AG]"
+        },
+        {
+            "name": "Val",
+            "symbol": "V",
+            "schema": "GU[UCAG]"
+        },
+        {
+            "name": "Ala",
+            "symbol": "A",
+            "schema": "GC[UCAG]"
+        },
+        {
+            "name": "Asp",
+            "symbol": "D",
+            "schema": "GA[UC]"
+        },
+        {
+            "name": "Glu",
+            "symbol": "E",
+            "schema": "GA[AG]"
+        },
+        {
+            "name": "Gly",
+            "symbol": "G",
+            "schema": "GG[UCAG]"
+        }
+    ]
+}
+
+
