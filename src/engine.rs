@@ -61,7 +61,12 @@ impl DecoderEngine {
     fn partial_decode(&self, partial_input: String) -> String {
         let mut output = String::from("");
         for i in (0..partial_input.len()).step_by(3) {
-            let symbol = self.get_symbol(partial_input[i..i+2].to_string());
+
+            let name = partial_input[i..i+3].to_string();
+
+            println!("Name: {}", name);
+
+            let symbol = self.get_symbol(name.clone());
             output += symbol.as_str();
         }
 
@@ -82,6 +87,7 @@ impl CompoundBase {
     }
 
     pub fn get_symbol_by_schema(&self, schema: String) -> String {
+        println!("Schema: {}", &schema);
         self.compounds.get(&schema).unwrap().to_string()
     }
     /// generating compounds db from schema file specified using path as argument
