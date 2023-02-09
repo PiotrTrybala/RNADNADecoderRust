@@ -24,6 +24,10 @@ impl DecoderEngine {
         }
     }
 
+    pub fn get_symbol(&self, name: String) -> String {
+        self.compound_base.get_symbol_by_schema(name)
+    }
+
 }
 
 impl CompoundBase {
