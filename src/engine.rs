@@ -64,13 +64,16 @@ impl CompoundBase {
 
         // reading and parsing schema file
         let content = fs::read_to_string(path).expect("Cannot read from the file");
-        let parsed_json: Value = serde_json::from_str(content.as_str()).unwrap();
+        let parsed_json: Value = serde_json::from_str(content.as_str().clone()).unwrap();
+
+        println!("Content: {}", content);
 
         // extracting special symbols
-        let special_symbols = parsed_json["special"].clone();
+        let special_symbols = parsed_json["special"].as_object().unwrap().clone();
 
         // extracting and inserting starting symbol to resulting db
-        let start_symbol = special_symbols["start"].clone();
+        let start_symbol = special_symbols["start"].as_object().unwrap().clone();
+
         compounds.insert(start_symbol["schema"].as_str().unwrap().to_string(), start_symbol["symbol"].as_str().unwrap().to_string());
 
         // extracting and inserting stopping symbols to resulting db
@@ -79,9 +82,9 @@ impl CompoundBase {
             compounds.insert(stop_sym["schema"].as_str().unwrap().to_string(), stop_sym["symbol"].as_str().unwrap().to_string());
         }
         // extracting and inserting other compounds to resulting db
-        let other_compounds = parsed_json["special"].clone();
+        let other_compounds = parsed_json["compounds"].as_array().unwrap().clone();
 
-        for comp in other_compounds.as_array().unwrap() {
+        for comp in other_compounds {
             /*
                 This part is resposible for parsing an range of characters
 
