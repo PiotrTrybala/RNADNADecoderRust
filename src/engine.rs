@@ -37,6 +37,10 @@ impl CompoundBase {
             compounds
         }
     }
+
+    pub fn get_symbol_by_schema(&self, schema: String) -> String {
+        self.compounds.get(&schema).unwrap().to_string()
+    }
     /// generating compounds db from schema file specified using path as argument
     fn gen_compound_base(schema_file: &String) -> HashMap<String, String> 
     {
@@ -64,11 +68,22 @@ impl CompoundBase {
         for stop_sym in stop_symbols.as_array().unwrap() {
             compounds.insert(stop_sym["schema"].as_str().unwrap().to_string(), stop_sym["symbol"].as_str().unwrap().to_string());
         }
-
+        // extracting and inserting other compounds to resulting db
         let other_compounds = parsed_json["special"].clone();
 
         for comp in other_compounds.as_array().unwrap() {
+            /*
+                This part is resposible for parsing an range of characters
 
+                If schema is specified like this:
+
+                    XX[YZ]
+
+                then generated resulting schemas are:
+
+                - XXXY
+                - XXXZ
+            */
             let schema = comp["schema"].as_str().unwrap().to_string();
             let symbol = comp["symbol"].as_str().unwrap().to_string();
             let range_start = schema.find("[").unwrap() + 1;
