@@ -37,35 +37,51 @@ impl CompoundBase {
             compounds
         }
     }
+    /// generating compounds db from schema file specified using path as argument
+    fn gen_compound_base(schema_file: &String) -> HashMap<String, String> 
+    {
 
-    fn gen_compound_base<V, K>(schema_file: &String) -> HashMap<V, K> {
-
-        let compounds = 
-
+        let mut compounds = HashMap::<String, String>::new();
+        // checking if schema file exist on given path, if not, PANIC!!!
         let path = Path::new(&schema_file);
-
         if !path.exists() {
             panic!("File does not exists!");
         }
 
-        let mut content = fs::read_to_string(path).expect("Cannot read from the file");
-
-
+        // reading and parsing schema file
+        let content = fs::read_to_string(path).expect("Cannot read from the file");
         let parsed_json: Value = serde_json::from_str(content.as_str()).unwrap();
 
-        
+        // extracting special symbols
         let special_symbols = parsed_json["special"].clone();
 
-
+        // extracting and inserting starting symbol to resulting db
         let start_symbol = special_symbols["start"].clone();
+        compounds.insert(start_symbol["schema"].as_str().unwrap().to_string(), start_symbol["symbol"].as_str().unwrap().to_string());
 
+        // extracting and inserting stopping symbols to resulting db
+        let stop_symbols = special_symbols["stop"].clone();
+        for stop_sym in stop_symbols.as_array().unwrap() {
+            compounds.insert(stop_sym["schema"].as_str().unwrap().to_string(), stop_sym["symbol"].as_str().unwrap().to_string());
+        }
 
+        let other_compounds = parsed_json["special"].clone();
 
+        for comp in other_compounds.as_array().unwrap() {
 
-
-
-        HashMap::<V, K>::new()
-
+            let schema = comp["schema"].as_str().unwrap().to_string();
+            let symbol = comp["symbol"].as_str().unwrap().to_string();
+            let range_start = schema.find("[").unwrap() + 1;
+            let range_stop = schema.len() - 1;
+            let base_schema = &schema[..range_start-1];
+            for i in range_start..range_stop {
+                let mut complete_base = String::from("");
+                complete_base += base_schema.clone();
+                complete_base.push(schema.chars().nth(i).unwrap());
+                compounds.insert(complete_base, symbol.clone());
+            }
+        }
+        compounds
     }
 
 }
