@@ -44,6 +44,10 @@ impl CompoundBase {
         self.compounds.is_empty()
     }
 
+    pub fn base_size(&self) -> usize {
+        self.compounds.len()
+    }
+
     pub fn get_symbol_by_schema(&self, schema: String) -> String {
         self.compounds.get(&schema).unwrap().to_string()
     }
