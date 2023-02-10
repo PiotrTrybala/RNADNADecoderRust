@@ -11,6 +11,8 @@ use engine::DecoderEngine;
 
 use rocket::*;
 
+use local_ip_address::local_ip;
+
 #[derive(Serialize, Deserialize)]
 pub struct Input {
     pub input: String
@@ -19,6 +21,11 @@ pub struct Input {
 #[derive(Serialize, Deserialize)]
 pub struct Output {
     pub results: Vec<String>
+}
+
+#[catch(404)]
+fn not_found(req: &Request) -> String {
+    format!("Could find {} for method {}", req.uri(), req.method().to_string())
 }
 
 #[post("/decoder", format = "json", data = "<input>")]
@@ -33,9 +40,20 @@ fn decode(input: Json<Input>) -> Json<Output> {
     };
     Json(out)
 }
+
+
+
 fn main() {
-    rocket::ignite().mount("/api/v1/", routes![decode]).launch();
+
+    let config = rocket::Config::build(config::Environment::Production)
+        .address(local_ip().unwrap().to_string())
+        .port(8000)
+        .finalize().unwrap();
+
+    rocket::custom(config).register(catchers![not_found]).mount("/api/v1/", routes![decode]).launch();
 }
+
+
 
 #[cfg(test)]
 pub mod tests {

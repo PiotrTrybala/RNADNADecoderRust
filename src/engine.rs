@@ -41,31 +41,41 @@ impl DecoderEngine {
 
         let mut extend = false;
         let input_length = input.len();
+        println!("Input length: {}", input_length);
         let mut total_length = (&input_length / 3) * 3;
+        println!("Total length: {}", total_length);
+
+        println!("Sub: {}", input_length - total_length);
+
+        if (input_length - total_length) < 2 {
+            total_length -= input_length - total_length;
+        }
+
+        println!("Total length after: {}", total_length);
+
         if input_length != total_length { 
             extend = true;
         }
 
         for i in 0..3 {
+            println!("Iter total_length: {}", total_length);
             let partial_input = &input[i..total_length];
             results.push(self.partial_decode(partial_input.to_string()));
             if extend {
                 total_length += 1;
             }
         }
-
-
         results 
     }
-
     fn partial_decode(&self, partial_input: String) -> String {
         let mut output = String::from("");
         for i in (0..partial_input.len()).step_by(3) {
 
+            if i + 3 > partial_input.len() {
+                break;
+            }
+
             let name = partial_input[i..i+3].to_string();
-
-            println!("Name: {}", name);
-
             let symbol = self.get_symbol(name.clone());
             output += symbol.as_str();
         }
@@ -87,7 +97,6 @@ impl CompoundBase {
     }
 
     pub fn get_symbol_by_schema(&self, schema: String) -> String {
-        println!("Schema: {}", &schema);
         self.compounds.get(&schema).unwrap().to_string()
     }
     /// generating compounds db from schema file specified using path as argument
