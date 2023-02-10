@@ -18,9 +18,7 @@ pub struct Input {
 
 #[derive(Serialize, Deserialize)]
 pub struct Output {
-    pub o1: String,
-    pub o2: String,
-    pub o3: String
+    pub results: Vec<String>
 }
 
 #[post("/decoder", format = "json", data = "<input>")]
@@ -31,9 +29,7 @@ fn decode(input: Json<Input>) -> Json<Output> {
     let results = engine.decode(input.input.to_string());
 
     let out = Output {
-        o1: results[0].to_string(),
-        o2: results[1].to_string(),
-        o3: results[2].to_string()
+        results
     };
     Json(out)
 }
