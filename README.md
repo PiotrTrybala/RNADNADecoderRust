@@ -9,6 +9,12 @@ Things to do
 
 ---
 
+These are steps for running project:
+```
+git clone https://github.com/PiotrTrybala/RNADNADecoderRust.git
+cd RNADNADecoderRust
+cargo build && cargo run
+```
 ## API
 
 To access api on port 8000 (or any specified) by url:
@@ -19,7 +25,7 @@ To access api on port 8000 (or any specified) by url:
 and you have to provide json body:
 ```json
 {
-  "input": "<your RNA and DNA sequence>"
+  "input": "<your RNA or DNA sequence>"
 }
 ```
 ---
