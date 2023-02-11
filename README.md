@@ -5,7 +5,6 @@ aminoacids chains
 
 Things to do
 - Write conversion from DNA to RNA
-- Write Dockerfile for application
 
 ---
 
