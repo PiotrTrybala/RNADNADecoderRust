@@ -35,11 +35,8 @@ and you have to provide json body:
 To use docker, first you have to build the dockerfile.
 
 For that command is:
+```sudo docker -t decoder:latest .```<br/>
 
-For linux: ```sudo docker -t decoder:latest .```<br/>
-For Windows or Mac: ```to be provided```
+Then after build process is done, you have to run the container with command:
 
-Then after building, to run the container:
-
-For linux: ```sudo docker run -p 5000:8000 -d --name "decoder" --ip 172.17.0.3 decoder:latest```<br/>
-For Windows or Mac: ```to be provided```
+```sudo docker run -p 5000:8000 -d --name "decoder" --ip 172.17.0.3 decoder:latest```<br/>
