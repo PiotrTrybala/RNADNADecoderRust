@@ -11,3 +11,4 @@ rocket_codegen = "0.4.4"
 rocket_contrib = "0.4.4"
 serde_json = "*"
 serde = { version = "1.0.104", features = ["derive"] }
+local-ip-address = "0.5.1"
